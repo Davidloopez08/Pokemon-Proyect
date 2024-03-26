@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Pokemon</title>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        <img src="img/logo.png" class="logo">
+    </div>
+
+    <div class="form-container">
+        <div class="form-container-search">
+            <form>
+                <div class="input-container">
+                    <input class="input-buscar" id="search-input" type="text" placeholder="Busca tu pokemon">
+                    <button class="button-buscar" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+        <div class="form-container-options">
+            <form>
+                <div class="input-container-options">
+                    <select class="input-options">
+                        <option value="normal">normal</option>
+                        <option value="fighting">fighting</option>
+                        <option value="flying">flying</option>
+                        <option value="poison">poison</option>
+                        <option value="ground">ground</option>
+                        <option value="bug">bug</option>
+                        <option value="ghost">ghost</option>
+                        <option value="steel">steel</option>
+                        <option value="fire">fire</option>
+                        <option value="water">water</option>
+                        <option value="grass">grass</option>
+                        <option value="electric">electric</option>
+                        <option value="psychic">psychic</option>
+                        <option value="ice">ice</option>
+                        <option value="dragon">dragon</option>
+                        <option value="dark">dark</option>
+                        <option value="fairy">fairy</option>
+                        <option value="unknown">unknown</option>
+                        <option value="shadow">shadow</option>
+                    </select>
+                    <button class="button-buscar-options" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="pokedex" id="pokedex"></div>
+    <div class="pokedex" id="pokedexSearch"></div>
+    <div id="button-back"></div>
+    
+    <script src="script/script.js"></script>
+
+    <div>
+        <button class="navigation-next" id="navigation-next">Mostrar más pokemones</button>
+    </div>
+
+</body>
+</html>
