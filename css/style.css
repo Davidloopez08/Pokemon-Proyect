@@ -296,3 +296,29 @@ body {
     margin-right: 10px;
     z-index: 1;
 }
+
+.autocomplete-suggestions {
+    position: absolute;
+    width: 380px;
+    background-color: #f0d698;
+    border-top: none;
+    display: none;
+    border-radius: 10px;
+    overflow-y: auto;
+    max-height: 150px;
+    z-index: 1;
+    margin-top: 250px
+}
+
+.autocomplete-suggestion {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #9e720a;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.autocomplete-suggestion:hover {
+    background-color: #9e720a;
+    color: white;
+}
