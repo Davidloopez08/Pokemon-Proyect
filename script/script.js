@@ -17,6 +17,7 @@ function mostrarPokemon(url){
                         response.id = '0' + response.id;
                     }
 
+                    const pokemonName = response.name.replace(/-/g, ' ');
                     const htmlBody = `
                         <div class="${response.types[0].type.name}">
                             <div class="pokemon-card">
@@ -30,7 +31,7 @@ function mostrarPokemon(url){
                                         #${response.id}
                                     </div>
                                     <div>
-                                        <h3 style="opacity: 0.7; text-transform: capitalize">${response.name}</h3>
+                                        <h3 style="opacity: 0.7; text-transform: capitalize">${pokemonName}</h3>
                                     </div>
                                     <div">
                                     ${response.types.length > 1 ? 
@@ -81,16 +82,16 @@ document.addEventListener("DOMContentLoaded", function() {
     function autocomplete() {
         const searchTerm = searchInput.value.toLowerCase();
         const url = `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=2000`;
-
+    
         fetch(url)
             .then((res) => res.json())
             .then((response) => {
                 const data = response.results;
-
                 const results = data.filter(pokemon => {
+                    // Reemplazar los guiones por espacios en el nombre del Pokémon
                     return pokemon.name.includes(searchTerm);
                 });
-
+    
                 if (results.length > 0) {
                     autocompleteSuggestions.innerHTML = results.map(pokemon => {
                         return `<div class="autocomplete-suggestion">${pokemon.name}</div>`;
@@ -103,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch((error) => console.error("Error:", error));
     }
+    
 
     autocompleteSuggestions.addEventListener('click', function(event) {
         if (event.target.classList.contains('autocomplete-suggestion')) {
@@ -135,7 +137,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     fetch(pokemon.url)
                         .then((res) => res.json())
                         .then((response) => {
+                            const pokemonName = response.name.replace(/-/g, ' ');
                             const htmlBody = `
+                            
                                 <div class="${response.types[0].type.name}">
                                     <div class="pokemon-card">
                                         <div>
@@ -148,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                                 #${response.id}
                                             </div>
                                             <div>
-                                                <h3 style="opacity: 0.7; text-transform: capitalize">${response.name}</h3>
+                                                <h3 style="opacity: 0.7; text-transform: capitalize">${pokemonName}</h3>
                                             </div>
                                             <div>
                                                 ${response.types.map(type => `<img src="img/type/${type.type.name}.svg" class="img-type">`).join('')}
@@ -218,85 +222,6 @@ document.addEventListener("DOMContentLoaded", function() {
     navNext.addEventListener("click", backButton);
 });
 
-/**
- * 
- * 
- * 
- * 
- * 
- * 
- */
-
-
-/*document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.form-container-options form');
-    const pokedex = document.querySelector('#pokedex');
-
-    form.addEventListener('submit', async function(event) {
-        event.preventDefault();
-
-        const searchTerm = document.querySelector('.input-options').value;
-        const url = `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=2000`;
-
-        document.getElementById('button-back').style.display = "block";
-        document.getElementById('navigation-next').style.display = "none";
-        var divPokedex = document.getElementById('pokedexSearch');
-        divPokedex.innerHTML = "";
-        var divPokedex = document.getElementById('pokedex');
-        divPokedex.innerHTML = "";
-
-        try {
-            const res = await fetch(url);
-            const response = await res.json();
-            const data = response.results.slice(0, 40);
-
-            for (const pokemon of data) {
-                const resPokemon = await fetch(pokemon.url);
-                const pokemonData = await resPokemon.json();
-                const types = pokemonData.types.map(type => type.type.name);
-
-                if (types.includes(searchTerm)) {
-                    const htmlBody = `
-                        <div class="${types[0]}">
-                            <div class="pokemon-card">
-                                <div>
-                                ${pokemonData.sprites.front_default != null ? 
-                                    `<img src="${pokemonData.sprites.front_default}">` : 
-                                    `<img style="width: 50px; height: auto;" src="img/favicon.png">`}     
-                                </div>
-                                <div class="contenido-container">
-                                    <div class="id-pokemon">
-                                        #${pokemonData.id}
-                                    </div>
-                                    <div>
-                                        <h3 style="opacity: 0.7;">${pokemonData.name}</h3>
-                                    </div>
-                                    <div>
-                                        ${types.map(type => `<img src="img/type/${type}.svg" class="img-type">`).join('')}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                    const div = document.createElement('div');
-                    div.innerHTML = htmlBody;
-                    pokedex.appendChild(div);
-                }
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    });
-
-    const backButton = document.createElement('button');
-    backButton.textContent = 'Back';
-    backButton.classList.add('navigation-next');
-    backButton.addEventListener('click', function() {
-        document.getElementById('navigation-next').style.display = "block";
-        document.getElementById('button-back').style.display = "none";
-        pokedex.innerHTML = "";
-        mostrarPokemon();
-    });
-});*/
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.form-container-options form');
@@ -326,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         .then((response) => {
                             const types = response.types.map(type => type.type.name);
                             if (types.includes(searchTerm)) {
+                                const pokemonName = response.name.replace(/-/g, ' ');
                                 const htmlBody = `
                                     <div class="${types[0]}">
                                         <div class="pokemon-card">
@@ -339,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                     #${response.id}
                                                 </div>
                                                 <div>
-                                                    <h3 style="opacity: 0.7; text-transform: capitalize">${response.name}</h3>
+                                                    <h3 style="opacity: 0.7; text-transform: capitalize">${pokemonName}</h3>
                                                 </div>
                                                 <div>
                                                     ${types.map(type => `<img src="img/type/${type}.svg" class="img-type">`).join('')}
